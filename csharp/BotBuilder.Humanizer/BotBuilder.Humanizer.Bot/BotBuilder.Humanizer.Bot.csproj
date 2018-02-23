@@ -10,10 +10,15 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
+    <PackageReference Include="Microsoft.Bot.Builder" Version="4.0.0-alpha20180221" />
   </ItemGroup>
 
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BotBuilder.Humanizer.Middleware\BotBuilder.Humanizer.Middleware.csproj" />
   </ItemGroup>
 
 </Project>

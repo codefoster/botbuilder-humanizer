@@ -8,7 +8,7 @@ using Microsoft.Bot.Schema;
 
 namespace BotBuilder.Humanizer.Middleware
 {
-    public partial class Humanizer : IMiddleware, IReceiveActivity
+    public partial class Humanizer : IMiddleware, ISendActivity
     {
         private static IList<string> _wrongPersonStatements = new[]
         {
@@ -27,11 +27,9 @@ namespace BotBuilder.Humanizer.Middleware
             _typingSpeed = options.TypingSpeed;
         }
 
-        public async Task ReceiveActivity(IBotContext context, MiddlewareSet.NextDelegate next)
+        public async Task SendActivity(IBotContext context, IList<IActivity> activities, MiddlewareSet.NextDelegate next)
         {
-            await next();
-
-            foreach (var response in context.Responses.OfType<IMessageActivity>())
+            foreach (var response in activities.OfType<IMessageActivity>().ToList())    // ToList required else collection labeled "modified"
             {
                 var delay = response.Text.Split(' ').Length / (_typingSpeed / 60 / 1000);
 
@@ -40,8 +38,10 @@ namespace BotBuilder.Humanizer.Middleware
                 {
                     var text = response.Text.ToCharArray();
                     var position = this.Random(0, text.Length - 2);
+
                     var aux = text[position + 1];
                     text[position + 1] = text[position];
+                    text[position] = aux;
 
                     response.Text = new string(text);
                 }
@@ -61,15 +61,16 @@ namespace BotBuilder.Humanizer.Middleware
                     if (_misspellings.TryGetValue(word, out var replacement) && new Random().NextDouble() < _misspelling)
                     {
                         response.Text = response.Text.Replace(word, replacement);
-                        TypingDelay(context, delay)
-                            .Reply($@"{word}*");
+                        TypingDelay(context, delay).Reply($@"{word}*");
                     }
                 }
             }
+
+            await next();
         }
 
         private IBotContext TypingDelay(IBotContext context, double msDelay) => context.ShowTyping().Delay((int)msDelay);
 
-        private int Random(double a, double b) => (int)Math.Round(b + (new Random().Next() * (a - b)));
+        private int Random(double a, double b) => (int)Math.Round(b + (new Random().NextDouble() * (a - b)));
     }
 }
