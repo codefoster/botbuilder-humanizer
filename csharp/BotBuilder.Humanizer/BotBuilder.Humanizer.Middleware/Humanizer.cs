@@ -37,7 +37,7 @@ namespace BotBuilder.Humanizer.Middleware
                 if (new Random().NextDouble() < _transpositions)
                 {
                     var text = response.Text.ToCharArray();
-                    var position = this.Random(0, text.Length - 2);
+                    var position = new Random().Next(text.Length - 1);
 
                     var aux = text[position + 1];
                     text[position + 1] = text[position];
@@ -50,7 +50,7 @@ namespace BotBuilder.Humanizer.Middleware
                 if (new Random().NextDouble() < _wrongPerson)
                 {
                     TypingDelay(context, delay)
-                        .Reply(_wrongPersonStatements[Random(0, _wrongPersonStatements.Count - 1)]);
+                        .Reply(_wrongPersonStatements[new Random().Next(_wrongPersonStatements.Count)]);
                     TypingDelay(context, delay)
                         .Reply("sorry... that last message was meant for someone else");
                 }
@@ -70,7 +70,5 @@ namespace BotBuilder.Humanizer.Middleware
         }
 
         private IBotContext TypingDelay(IBotContext context, double msDelay) => context.ShowTyping().Delay((int)msDelay);
-
-        private int Random(double a, double b) => (int)Math.Round(b + (new Random().NextDouble() * (a - b)));
     }
 }
