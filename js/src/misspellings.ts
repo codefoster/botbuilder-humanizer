@@ -94,6 +94,7 @@ export default {
     "surprise": "suprise",
     "tattoo": "tatoo",
     "tendency": "tendancy",
+    "the": "teh",
     "therefore": "therefor",
     "threshold": "threshhold",
     "tomorrow": "tommorow",
