@@ -1,0 +1,24 @@
+{
+  "name": "botbuilder-humanizer",
+  "version": "0.1.0",
+  "description": "Gives your Microsoft Bot Builder v4 bot a bit of a human feel by randomly injecting misspellings, letter transpositions, and even messages to the wrong recipient.",
+  "main": "./lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codefoster/botbuilder-humanizer.git"
+  },
+  "keywords": ["botbuilder","microsoft","bot-builder","human"],
+  "author": "Jeremy Foster <jeremy.foster@live.com> (http://codefoster.com)",
+  "license": "Apache 2.0",
+  "bugs": {
+    "url": "https://github.com/codefoster/botbuilder-humanizer/issues"
+  },
+  "homepage": "https://github.com/codefoster/botbuilder-humanizer#readme",
+  "dependencies": {
+    "botbuilder": "^4.0.0-m1.4",
+    "typescript": "^2.7.2"
+  }
+}
