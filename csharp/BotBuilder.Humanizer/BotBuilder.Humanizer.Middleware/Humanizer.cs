@@ -34,7 +34,8 @@ namespace BotBuilder.Humanizer.Middleware
                 var delay = response.Text.Split(' ').Length / (_typingSpeed / 60 / 1000);
 
                 // transpositions
-                if (new Random().NextDouble() < _transpositions)
+                if (response.Text.Length > 1
+                    && new Random().NextDouble() < _transpositions)
                 {
                     var text = response.Text.ToCharArray();
                     var position = new Random().Next(text.Length - 1);
