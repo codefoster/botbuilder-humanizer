@@ -2,6 +2,20 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>BotBuilder.Humanizer</PackageId>
+    <Version>0.1.1</Version>
+    <Authors>bc3tech</Authors>
+    <Company />
+    <Product />
+    <Description>Gives your Microsoft Bot Builder v4 bot a bit of a human feel by randomly injecting misspellings, letter transpositions, and even messages to the wrong recipient.</Description>
+    <Copyright>2018</Copyright>
+    <RepositoryUrl>https://github.com/codefoster/botbuilder-humanizer/tree/master/csharp/BotBuilder.Humanizer</RepositoryUrl>
+    <RepositoryType>GitHub</RepositoryType>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\Release\netstandard2.0\BotBuilder.Humanizer.Middleware.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
