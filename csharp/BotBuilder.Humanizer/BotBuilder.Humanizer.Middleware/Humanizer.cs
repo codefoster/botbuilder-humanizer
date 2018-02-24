@@ -8,6 +8,11 @@ using Microsoft.Bot.Schema;
 
 namespace BotBuilder.Humanizer.Middleware
 {
+    /// <summary>
+    /// Middleware class for BotBuilder Humanizer
+    /// </summary>
+    /// <seealso cref="Microsoft.Bot.Builder.Middleware.IMiddleware" />
+    /// <seealso cref="Microsoft.Bot.Builder.Middleware.ISendActivity" />
     public partial class Humanizer : IMiddleware, ISendActivity
     {
         private static IList<string> _wrongPersonStatements = new[]
@@ -19,6 +24,10 @@ namespace BotBuilder.Humanizer.Middleware
         };
 
         private readonly double _misspelling, _wrongPerson, _transpositions, _typingSpeed;
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Humanizer"/> class.
+        /// </summary>
+        /// <param name="options">The options.</param>
         public Humanizer(HumanizerOptions options)
         {
             _misspelling = options.Misspelling;
@@ -27,6 +36,13 @@ namespace BotBuilder.Humanizer.Middleware
             _typingSpeed = options.TypingSpeed;
         }
 
+        /// <summary>
+        /// Intercepts messages from the bot to the end user.
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <param name="activities">The activities.</param>
+        /// <param name="next">The next.</param>
+        /// <returns></returns>
         public async Task SendActivity(IBotContext context, IList<IActivity> activities, MiddlewareSet.NextDelegate next)
         {
             foreach (var response in activities.OfType<IMessageActivity>().ToList())    // ToList required else collection labeled "modified"
